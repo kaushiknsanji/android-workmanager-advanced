@@ -17,14 +17,15 @@
 package com.example.background
 
 import android.app.Application
-import androidx.viewbinding.BuildConfig
+import androidx.work.Configuration
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
 /**
- * [Application] subclass to initialize [Timber] logger for the app.
+ * [Application] subclass to initialize [Timber] logger for the app and
+ * to provide the custom [Configuration] for [androidx.work.WorkManager].
  */
-class BlurApplication() : Application() {
+class BlurApplication() : Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
@@ -35,4 +36,23 @@ class BlurApplication() : Application() {
         }
 
     }
+
+    /**
+     * A class that can provide the [Configuration] for WorkManager and allow for on-demand
+     * initialization of WorkManager
+     *
+     * @return The [Configuration] used to initialize WorkManager
+     */
+    override fun getWorkManagerConfiguration(): Configuration = if (BuildConfig.DEBUG) {
+        // Use Logging Level of DEBUG for DEBUG Build Type
+        Configuration.Builder()
+                .setMinimumLoggingLevel(android.util.Log.DEBUG)
+                .build()
+    } else {
+        // Use Logging Level of ERROR for other Build Types
+        Configuration.Builder()
+                .setMinimumLoggingLevel(android.util.Log.ERROR)
+                .build()
+    }
+
 }

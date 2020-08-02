@@ -15,6 +15,7 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.background">
 
     <!-- Permission for using Internet -->
@@ -41,6 +42,13 @@
         </activity>
 
         <activity android:name=".BlurActivity" />
+
+        <!-- Disabling the default initialization of WorkManager -->
+        <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            android:exported="false"
+            tools:node="remove" />
 
     </application>
 
