@@ -22,6 +22,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.work.WorkInfo
 import com.bumptech.glide.Glide
 import com.example.background.databinding.ActivityBlurBinding
 
@@ -111,6 +112,23 @@ class BlurActivity : AppCompatActivity() {
             // Delegate to the ViewModel to cancel unfinished work
             viewModel.cancelWork()
         }
+
+        // Register an observer on the BlurWorker's WorkInfo objects LiveData to retrieve
+        // its status and progress Data
+        viewModel.progressWorkInfos.observe(this, Observer { workInfos ->
+            if (!workInfos.isNullOrEmpty()) {
+                // When WorkInfo Objects are generated
+
+                // Apply for all WorkInfo Objects
+                workInfos.forEach { workInfo ->
+                    if (workInfo.state == WorkInfo.State.RUNNING) {
+                        // When the Work is in progress,
+                        // obtain the Progress Data and update the Progress to ProgressBar
+                        binding.progressBar.progress = workInfo.progress.getInt(KEY_PROGRESS, 0)
+                    }
+                }
+            }
+        })
     }
 
     /**
@@ -133,6 +151,8 @@ class BlurActivity : AppCompatActivity() {
             progressBar.visibility = View.GONE
             cancelButton.visibility = View.GONE
             goButton.visibility = View.VISIBLE
+            // Ensuring that the progress restarts at initial 0 after completion of Work
+            progressBar.progress = 0
         }
     }
 

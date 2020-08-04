@@ -8,6 +8,7 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.example.background.KEY_BLUR_LEVEL
 import com.example.background.KEY_IMAGE_URI
+import com.example.background.KEY_PROGRESS
 import timber.log.Timber
 
 /**
@@ -50,8 +51,14 @@ class BlurWorker(context: Context, workerParams: WorkerParameters) : Worker(cont
         // Show a Notification before starting the work for blurring the image
         makeStatusNotification(appContext, "Blurring Image...")
 
+        // Publish intermediate progress
+        setProgressAsync(workDataOf(KEY_PROGRESS to 5))
+
         // Slow down the start so that it is easier to see each WorkRequest start
         sleep()
+
+        // Publish intermediate progress
+        setProgressAsync(workDataOf(KEY_PROGRESS to 10))
 
         return try {
             // If the Uri of the Image to be blurred is invalid/empty, then log the error
@@ -61,6 +68,9 @@ class BlurWorker(context: Context, workerParams: WorkerParameters) : Worker(cont
                 throw IllegalArgumentException("Invalid input Uri $pictureToBlurUriStr")
             }
 
+            // Publish intermediate progress
+            setProgressAsync(workDataOf(KEY_PROGRESS to 20))
+
             // Get the ContentResolver instance
             val contentResolver = appContext.contentResolver
 
@@ -68,11 +78,20 @@ class BlurWorker(context: Context, workerParams: WorkerParameters) : Worker(cont
             val pictureToBlur = BitmapFactory
                     .decodeStream(contentResolver.openInputStream(Uri.parse(pictureToBlurUriStr)))
 
+            // Publish intermediate progress
+            setProgressAsync(workDataOf(KEY_PROGRESS to 40))
+
             // Apply the blur filter on the Image
             val blurredPicture = blurBitmap(appContext, pictureToBlur, blurLevel)
 
+            // Publish intermediate progress
+            setProgressAsync(workDataOf(KEY_PROGRESS to 80))
+
             // Write the result to a temporary image file
             val blurredPictureUri = writeBitmapToFile(appContext, blurredPicture)
+
+            // Publish progress completion
+            setProgressAsync(workDataOf(KEY_PROGRESS to 100))
 
             // Return as successful with the output Data containing the Uri
             // to the temporary blurred image file, in order to make it available

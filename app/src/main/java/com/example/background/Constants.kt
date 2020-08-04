@@ -37,6 +37,8 @@ const val OUTPUT_PATH = "blur_filter_outputs"
 const val KEY_IMAGE_URI = "KEY_IMAGE_URI"
 const val KEY_BLUR_LEVEL = "KEY_BLUR_LEVEL"
 const val TAG_OUTPUT = "OUTPUT"
+const val TAG_PROGRESS = "PROGRESS"
+const val KEY_PROGRESS = "KEY_PROGRESS"
 const val TITLE_IMAGE = "BlurredImage"
 const val DATE_FORMAT = "yyyy.MM.dd 'at' HH:mm:ss z"
 

@@ -49,6 +49,9 @@ class BlurViewModel(application: Application) : AndroidViewModel(application) {
     // LiveData for SaveToImageFileWorker's WorkInfo objects to retrieve its status and output Data
     val outputWorkInfos: LiveData<List<WorkInfo>> = workManager.getWorkInfosByTagLiveData(TAG_OUTPUT)
 
+    // LiveData for BlurWorker's WorkInfo objects to retrieve its status and Progress Data
+    val progressWorkInfos: LiveData<List<WorkInfo>> = workManager.getWorkInfosByTagLiveData(TAG_PROGRESS)
+
     /**
      * Create the WorkRequest to apply the blur and save the resulting image
      *
@@ -63,6 +66,7 @@ class BlurViewModel(application: Application) : AndroidViewModel(application) {
         val blurRequest = OneTimeWorkRequestBuilder<BlurWorker>()
                 // Input Data containing the Image to blur and the blur level to apply
                 .setInputData(createInputDataForUri(blurLevel))
+                .addTag(TAG_PROGRESS) // Use Tag to get its status and Progress Data
                 .build()
 
         // Configure charging constraint and available storage constraint for SaveImageToFileWorker
