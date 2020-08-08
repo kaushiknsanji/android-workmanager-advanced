@@ -31,6 +31,11 @@ buildscript {
     versions.glide = "4.11.0"
     versions.timber = "4.7.1"
 
+    // Testing library versions
+    versions.core_testing = "2.1.0"
+    versions.test_ext_junit = "1.1.1"
+    versions.test_runner = "1.2.0"
+
     repositories {
         google()
         jcenter()
