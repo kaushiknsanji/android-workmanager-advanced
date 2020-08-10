@@ -1,60 +1,43 @@
-WorkManager Codelab
-===================================
+# WorkManager Advanced
 
-This repository contains the code for the
-[WorkManager Codelab](https://codelabs.developers.google.com/codelabs/android-workmanager):
+**Blur-O-Matic** app built by following the instructions detailed in the Google Codelab **["Advanced WorkManager"][WorkManager Advanced Codelab]**. Original code by Google for this codelab can be referred [here][WorkManager Advanced Repository].
 
-Java version
---------------
+## What one will learn
 
-The Java version of this codelab is available under the
-[`Java`](https://github.com/googlecodelabs/android-workmanager/tree/java) branch of this
-repository.
+* Creating custom `Configuration` for WorkManager
+* Tagging WorkRequests to publish and obtain Progress `Data` for displaying in the UI
+* Testing the Workers using WorkManager Testing library `work-testing` artifact 
 
-Introduction
-------------
+## What is not taught
 
-At I/O 2018 Google announced [Android Jetpack](https://developer.android.com//jetpack/),
-a collection of libraries, tools and architectural guidance to accelerate and simplify the
-development of great Android apps. One of those libraries is the
-[WorkManager library](https://developer.android.com/topic/libraries/architecture/workmanager/).
-The WorkManager library provides a unified API for deferrable one-off or recurring background tasks
-that need guaranteed execution. You can learn more by reading the
-[WorkManager Guide](https://developer.android.com/topic/libraries/architecture/workmanager/), the
-[WorkManager Reference](https://developer.android.com/reference/androidx/work/package-summary)
-or doing the
-[WorkManager Codelab](https://codelabs.developers.google.com/codelabs/android-workmanager).
+Advanced stuff like:
+* Periodic Work requests
+* Parallel Work requests
+* Input Mergers
+* CoroutineWorker
+* Threading in Workers
 
-Pre-requisites
---------------
+## Getting Started
 
-* Android Studio 3.6 or later and you know how to use it.
+* Android Studio 3.6 or higher with updated SDK and Gradle.
+* Android device or emulator running API level 14+.
 
-* Make sure Android Studio is updated, as well as your SDK and Gradle.
-Otherwise, you may have to wait for a while until all the updates are done.
-
-* A device or emulator that runs API level 16+
-
-You need to be solidly familiar with the Kotlin programming language,
-object-oriented design concepts, and Android Development Fundamentals.
-In particular:
-
+### Prerequisites
+* Familiarity with the Kotlin programming language, object-oriented design concepts and Android Development Fundamentals
 * Basic layouts, widgets and [View Bindings](https://d.android.com/topic/libraries/view-binding)
 * Some familiarity with Uris and File I/O
-* Familiarity with [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
-  and [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
+* Familiarity with [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) and [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
+* Familiarity with the basics of `WorkManager` from the [codelab](https://codelabs.developers.google.com/codelabs/android-workmanager/index.html)
 
-Getting Started
----------------
+## Branches in this Repository
 
-1. [Install Android Studio](https://developer.android.com/studio/install.html),
-if you don't already have it.
-2. Download the sample.
-2. Import the sample into Android Studio.
-3. Build and run the sample.
+* **[starter-code-kotlin](https://github.com/kaushiknsanji/android-workmanager-advanced/tree/starter-code-kotlin)**
+	* This is the Starter code for the [codelab][WorkManager Advanced Codelab], which is actually based on the [code](https://github.com/kaushiknsanji/android-workmanager-basics/tree/master) of the final version of the [basics codelab](https://codelabs.developers.google.com/codelabs/android-workmanager/index.html).
+* **[master](https://github.com/kaushiknsanji/android-workmanager-advanced/tree/master)**
+	* This contains the Solution for the [codelab][WorkManager Advanced Codelab].
+    * In comparison with the original [repository][WorkManager Advanced Repository], this repository contains modified [TestUtils](https://github.com/kaushiknsanji/android-workmanager-advanced/blob/master/app/src/androidTest/java/com/example/background/workers/TestUtils.kt) with minor changes to maintain idiomatic Kotlin usage.
 
-License
--------
+## License
 
 Copyright 2018 Google, Inc.
 
@@ -75,4 +58,8 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
 License for the specific language governing permissions and limitations under
-the License.
+the License.		
+
+<!-- Reference Style Links are to be placed after this -->
+[WorkManager Advanced Codelab]: https://codelabs.developers.google.com/codelabs/android-adv-workmanager/index.html
+[WorkManager Advanced Repository]: https://github.com/googlecodelabs/android-workmanager/tree/advanced
